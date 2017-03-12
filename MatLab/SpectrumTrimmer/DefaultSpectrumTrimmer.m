@@ -2,25 +2,23 @@ classdef DefaultSpectrumTrimmer < SpectrumTrimmerInterface
     %DefaultSpectrumTrimmer Trims spectrum according provided parameters
     
     properties (Access = private)
-        SpectrumStart double
-        SpectrumEnd double            
+        SpectrumRange Range           
     end
     
     methods
-        function obj = DefaultSpectrumTrimmer(spectrumStart,spectrumEnd)
-            assert(spectrumStart > 0, 'spectrumStart must be more then 0')
-            assert(spectrumEnd > spectrumStart, 'spectrumEnd must be more then spectrumStart')
+        function obj = DefaultSpectrumTrimmer(spectrumRange)
+            assert(isa(spectrumRange, 'Range'), 'spectrumRange must be of type "Range"');
+            assert(spectrumRange.From > 0, 'spectrumRange.From must be more then 0');
             
-            obj.SpectrumStart = spectrumStart;
-            obj.SpectrumEnd = spectrumEnd;
+            obj.SpectrumRange = spectrumRange;
         end
         
         function trimmedSpectrum = Trim(obj, spectrum)
-            assert(isa(spectrum, 'Spectrum'), 'spectrum must be of type "Spectrum"')
+            assert(isa(spectrum, 'Spectrum'), 'spectrum must be of type "Spectrum"');
 
             oldWaveNumbers = spectrum.WaveNumbers;
-            startIndex = find(oldWaveNumbers >= obj.SpectrumStart, 1);
-            endIndex = find(oldWaveNumbers <= obj.SpectrumEnd, 1, 'last');
+            startIndex = find(oldWaveNumbers >= obj.SpectrumRange.From, 1);
+            endIndex = find(oldWaveNumbers <= obj.SpectrumRange.To, 1, 'last');
             
             newWaveNumbers = oldWaveNumbers(startIndex:endIndex);
             newData = spectrum.Data(:, startIndex:endIndex);

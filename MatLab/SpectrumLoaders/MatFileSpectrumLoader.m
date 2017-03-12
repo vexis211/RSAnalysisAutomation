@@ -3,7 +3,7 @@ classdef MatFileSpectrumLoader < SpectrumLoaderInterface
     
     methods        
         function spectrum = Load(~, filePath)
-            assert(exist(filePath, 'file') == 2, ['"' filePath '" does not exists.'])
+            assert(exist(filePath, 'file') == 2, ['"' filePath '" does not exists.']);
 
             loaded = load(filePath, '-mat');
             

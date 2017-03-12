@@ -7,14 +7,14 @@ classdef EquidistantSpectrumScaler < SpectrumScalerInterface
     end
     
     methods
-        function obj = EquidistantSpectrumScaler(scaleMethod, spectrumStart,spectrumEnd,step)
-            assert(isa(scaleMethod, 'EquidistantScaleMethod'), 'scaleMethod must be of type "EquidistantScaleMethod"')
-            assert(spectrumStart > 0, 'spectrumStart must be more then 0')
-            assert(spectrumEnd > spectrumStart, 'spectrumEnd must be more then spectrumStart')
-            assert(step > 0, 'step must be more then 0')
+        function obj = EquidistantSpectrumScaler(scaleMethod, spectrumRange, step)
+            assert(isa(scaleMethod, 'EquidistantScaleMethod'), 'scaleMethod must be of type "EquidistantScaleMethod"');
+            assert(isa(spectrumRange, 'Range'), 'spectrumRange must be of type "Range"');
+            assert(spectrumRange.From > 0, 'spectrumRange.From must be more then 0');
+            assert(step > 0, 'step must be more then 0');
             
             obj.ScaleMethod = scaleMethod;
-            obj.NewWaveNumbers = (spectrumStart:step:spectrumEnd);
+            obj.NewWaveNumbers = (spectrumRange.From:step:spectrumRange.To);
         end
         
         function scaledSpectrum = Scale(obj, spectrum)
