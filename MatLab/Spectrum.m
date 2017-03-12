@@ -3,7 +3,7 @@ classdef Spectrum
     
     properties (SetAccess = private)
         Name
-        TimeStamp
+        TimeStamp datetime
         SizeX uint16
         SizeY uint16
         WaveNumbers double
@@ -18,7 +18,7 @@ classdef Spectrum
             assert(sizeY > 0, 'sizeY must be more then 0')
             assert(isreal(waveNumbers), 'waveNumbers must be of type double[m]')
             assert(isreal(data), 'data must be of type double[m,n]')
-            assert(size(waveNumbers) ~= size(data, 2), ...
+            assert(size(waveNumbers, 2) == size(data, 2), ...
                 'size fo waveNumbers must equal size of second dimension of data')
             
             obj.Name = name;
