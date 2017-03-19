@@ -2,18 +2,18 @@ classdef EquidistantSpectrumScaler < SpectrumScalerInterface
     %EquidistantSpectrumScaler Scales spectrum equidistantly according provided parameters
     
     properties (Access = private)
-        ScaleMethod EquidistantScaleMethod
+        InterpolationMethod InterpolationMethod
         NewWaveNumbers double            
     end
     
     methods
-        function obj = EquidistantSpectrumScaler(scaleMethod, spectrumRange, step)
-            assert(isa(scaleMethod, 'EquidistantScaleMethod'), 'scaleMethod must be of type "EquidistantScaleMethod"');
+        function obj = EquidistantSpectrumScaler(interpolationMethod, spectrumRange, step)
+            assert(isa(interpolationMethod, 'InterpolationMethod'), 'interpolationMethod must be of type "InterpolationMethod"');
             assert(isa(spectrumRange, 'Range'), 'spectrumRange must be of type "Range"');
             assert(spectrumRange.From > 0, 'spectrumRange.From must be more then 0');
             assert(step > 0, 'step must be more then 0');
             
-            obj.ScaleMethod = scaleMethod;
+            obj.InterpolationMethod = interpolationMethod;
             obj.NewWaveNumbers = (spectrumRange.From:step:spectrumRange.To);
         end
         
@@ -22,13 +22,13 @@ classdef EquidistantSpectrumScaler < SpectrumScalerInterface
 
             spectrumCount=size(spectrum.Data, 1);
             newData=zeros(spectrumCount, length(obj.NewWaveNumbers));
-            scaleMethodChar = lower(char(obj.ScaleMethod));
+            interpolationMethodChar = lower(char(obj.InterpolationMethod));
             
             oldWaveNumbers = spectrum.WaveNumbers;
             newWaveNumbers = obj.NewWaveNumbers;
             oldData = spectrum.Data;
             parfor i=1:spectrumCount
-                newData(i,:) = interp1(oldWaveNumbers, oldData(i,:), newWaveNumbers, scaleMethodChar);
+                newData(i,:) = interp1(oldWaveNumbers, oldData(i,:), newWaveNumbers, interpolationMethodChar);
             end            
             newName = [spectrum.Name '_scaled'];
             
