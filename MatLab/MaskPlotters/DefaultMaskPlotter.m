@@ -9,7 +9,9 @@ classdef DefaultMaskPlotter < MaskPlotterInterface
             Z=flipud(rot90(reshape(mask,sizeX,sizeY))); % TODO is this ok?
             figure('Name', title);
             contourf(X, Y, Z);
-            colormap(flag);
+            figureColorMap = [0.6, 0.6, 0.6
+                0, 1, 0];
+            colormap(figureColorMap);
         end            
     end    
 end
