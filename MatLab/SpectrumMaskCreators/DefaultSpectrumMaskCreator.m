@@ -31,7 +31,7 @@ classdef DefaultSpectrumMaskCreator < SpectrumMaskCreatorInterface
             isWaterRangeSignificant = @(values) obj.WaterRangeSignificancyIdentifier.IsRangeSignificant(...
                 waveNumbers, values);
             
-            for i=1:spectrumCount % TODO parfor
+            parfor i=1:spectrumCount
                 values = data(i,:);
                 % If spectrum has significant C-H range we mark it as part of cell
                 isCell = isCellRangeSignificant(values);

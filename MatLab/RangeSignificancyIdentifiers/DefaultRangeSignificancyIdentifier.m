@@ -13,7 +13,6 @@ classdef DefaultRangeSignificancyIdentifier < RangeSignificancyIdentifierInterfa
                 numberOfBorderPoints, interpolationMethod)
             assert(isa(range, 'Range'), 'range must be of type "Range"');
             assert(range.From > 0, 'chRange.From must be more then 0');
-            assert(threshold > 0, 'threshold must be more then 0');
             assert(numberOfBorderPoints > 0, 'numberOfBorderPoints must be more then 0');
             
             obj.Range = range;
