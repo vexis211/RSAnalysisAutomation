@@ -1,4 +1,4 @@
-classdef Spectrum
+classdef Spectrum < handle
     %SPECTRUM Raman spectrum
     
     properties (SetAccess = private)

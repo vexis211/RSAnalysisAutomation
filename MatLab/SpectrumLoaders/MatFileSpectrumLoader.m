@@ -13,8 +13,8 @@ classdef MatFileSpectrumLoader < SpectrumLoaderInterface
             
             name = loadedSpectrumData.name;
             timeStamp = datetime(loadedSpectrumData.date);
-            sizeX = loadedSpectrumData.imagesize(1);
-            sizeY = loadedSpectrumData.imagesize(2);
+            sizeY = loadedSpectrumData.imagesize(1); % TODO is this ok?
+            sizeX = loadedSpectrumData.imagesize(2); % TODO is this ok?
             waveNumbers = loadedSpectrumData.axisscale{2,1};
             data = loadedSpectrumData.data;
             

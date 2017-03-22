@@ -32,8 +32,9 @@ classdef DefaultRangeSignificancyIdentifier < RangeSignificancyIdentifierInterfa
             
 			bordersValues = [values(rangeStartIndex:rangeStartIndex+obj.NumberOfBorderPoints-1) ...
                 values(rangeEndIndex-obj.NumberOfBorderPoints+1:rangeEndIndex)];
+            interpolationMethodChar = lower(char(obj.InterpolationMethod));
             interpolatedValues = interp1(bordersWaveNumbers, bordersValues, ...
-                rangeWaveNumbers, obj.InterpolationMethod);
+                rangeWaveNumbers, interpolationMethodChar);
 
             % Substract found values from spectrum values in range
 			rangeValues = values(rangeStartIndex:rangeEndIndex);

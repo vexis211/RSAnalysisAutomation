@@ -1,4 +1,4 @@
-classdef RangeSignificancyIdentifierInterface
+classdef RangeSignificancyIdentifierInterface < handle
     %RangeSignificancyIdentifierInterface Identifies if range values are significant
     
     methods (Abstract)

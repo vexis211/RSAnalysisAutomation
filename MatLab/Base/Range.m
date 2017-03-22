@@ -1,4 +1,4 @@
-classdef Range
+classdef Range < handle
     %Range range
     
     properties (SetAccess = private)
