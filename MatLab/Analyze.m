@@ -27,7 +27,8 @@ function Analyze(matFilePath)
     [cellMask, pureWaterMask] = spectrumMaskCreator.CreateMask(trimmedSpectrum);
 
     mainCellMaskIdentifier = DefaultMainCellMaskIdentifier;
-    [hasValidCell, mainCellMask] = mainCellMaskIdentifier.IdentifyMainCell(cellMask);
+    [hasValidCell, mainCellMask] = mainCellMaskIdentifier.IdentifyMainCell(cellMask, ...
+        [spectrum.SizeY spectrum.SizeX]); % TODO is it ok?
     
 %     maskPlotter = DefaultMaskPlotter;
 %     maskPlotter.Plot(cellMask, spectrum.SizeX, spectrum.SizeY, 'Cells');
