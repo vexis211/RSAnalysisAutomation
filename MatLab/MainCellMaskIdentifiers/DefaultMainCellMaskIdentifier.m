@@ -70,6 +70,7 @@ classdef DefaultMainCellMaskIdentifier < MainCellMaskIdentifierInterface
         
         function componentCellMask = GetOneComponent(obj, cellMask, maskSize, cellPoint)
             
+            % this is not correct algorithm
             componentCellMask = zeros(size(cellMask));
             
             firstDimSize = double(maskSize(1));
@@ -87,8 +88,8 @@ classdef DefaultMainCellMaskIdentifier < MainCellMaskIdentifierInterface
 
                         if (0 < index && index <= cellMaskSize && cellMask(index) > 0)
                             componentCellMask(index) = cellMask(index);
-%                         else
-%                             break;
+                         else
+                             break;
                         end                            
                     end
                 end
